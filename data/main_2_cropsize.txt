@@ -1,0 +1,5 @@
+[0]
+i32MainWidth_CropNoScale=4160
+i32MainHeight_CropNoScale=3120
+i32AuxWidth_CropNoScale=1824
+i32AuxHeight_CropNoScale=1368
