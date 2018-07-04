@@ -33,7 +33,7 @@ int BuildOffScreen(LPASVLOFFSCREEN offscreen, int width, int height, void* plane
 }
 
 /*----------------------------Image Refocus-------------------------------------*/
-JNIEXPORT jint JNICALL ImageRefocus_Init(JNIEnv *env, jobject jobj, jint intMode)
+JNIEXPORT jlong JNICALL ImageRefocus_Init(JNIEnv *env, jobject jobj, jint intMode)
 {
 	//intMode
 	//#define ARC_DCIR_NORMAL_MODE				0x01
@@ -41,10 +41,10 @@ JNIEXPORT jint JNICALL ImageRefocus_Init(JNIEnv *env, jobject jobj, jint intMode
 	int ret = 0;
 	CArcImageRefocus* imagerefocus = new CArcImageRefocus();
 	ret = imagerefocus->Init(intMode);
-	return (jint)imagerefocus;
+	return (jlong)imagerefocus;
 }
 
-JNIEXPORT void JNICALL ImageRefocus_Uninit(JNIEnv *env, jobject jobj, jint intRefocus)
+JNIEXPORT void JNICALL ImageRefocus_Uninit(JNIEnv *env, jobject jobj, jlong intRefocus)
 {
 	if (intRefocus)
 	{
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL ImageRefocus_Uninit(JNIEnv *env, jobject jobj, jint intRe
 	}
 }
 
-JNIEXPORT jint JNICALL ImageRefocus_SetDCIRParam(JNIEnv *env, jobject jobj, jint intRefocus, jint imgDegree, jint fMaxFOV)
+JNIEXPORT jint JNICALL ImageRefocus_SetDCIRParam(JNIEnv *env, jobject jobj, jlong intRefocus, jint imgDegree, jint fMaxFOV)
 {
 	int ret = -1;
 	if (intRefocus)
@@ -78,7 +78,7 @@ JNIEXPORT jint JNICALL ImageRefocus_SetDCIRParam(JNIEnv *env, jobject jobj, jint
 	return ret;
 }
 
-JNIEXPORT jint JNICALL ImageRefocus_SetCameraImageInfo(JNIEnv *env, jobject jobj, jint intRefocus, jint main_width, jint main_height, jint aux_width, jint aux_height)
+JNIEXPORT jint JNICALL ImageRefocus_SetCameraImageInfo(JNIEnv *env, jobject jobj, jlong intRefocus, jint main_width, jint main_height, jint aux_width, jint aux_height)
 {
 	int ret = -1;	
 
@@ -94,7 +94,7 @@ JNIEXPORT jint JNICALL ImageRefocus_SetCameraImageInfo(JNIEnv *env, jobject jobj
 	return ret;
 }
 
-JNIEXPORT jint JNICALL ImageRefocus_SetParam(JNIEnv *env, jobject jobj, jint intRefocus, int ptX, int ptY, int blurIntensity)
+JNIEXPORT jint JNICALL ImageRefocus_SetParam(JNIEnv *env, jobject jobj, jlong intRefocus, int ptX, int ptY, int blurIntensity)
 {
 	int ret = -1;	
 
@@ -110,7 +110,7 @@ JNIEXPORT jint JNICALL ImageRefocus_SetParam(JNIEnv *env, jobject jobj, jint int
 	return ret;
 }
 
-JNIEXPORT jint JNICALL ImageRefocus_SetCalibrationData(JNIEnv *env, jobject jobj, jint intRefocus, jbyteArray jCaliData, jint dataLength)
+JNIEXPORT jint JNICALL ImageRefocus_SetCalibrationData(JNIEnv *env, jobject jobj, jlong intRefocus, jbyteArray jCaliData, jint dataLength)
 {
 	int ret = -1;	
 
@@ -129,7 +129,7 @@ JNIEXPORT jint JNICALL ImageRefocus_SetCalibrationData(JNIEnv *env, jobject jobj
 	return ret;
 }
 
-JNIEXPORT jbyteArray JNICALL ImageRefocus_GetImageResult(JNIEnv *env, jobject jobj, jint intRefocus, jbyteArray jleftData, jint leftlength, jbyteArray jrightData, jint rightlength, int width, int height, int auxWidth, int auxHeight)
+JNIEXPORT jbyteArray JNICALL ImageRefocus_GetImageResult(JNIEnv *env, jobject jobj, jlong intRefocus, jbyteArray jleftData, jint leftlength, jbyteArray jrightData, jint rightlength, int width, int height, int auxWidth, int auxHeight)
 {
 	int res = -1;
 	jbyteArray dataArray = 0;
@@ -169,7 +169,7 @@ JNIEXPORT jbyteArray JNICALL ImageRefocus_GetImageResult(JNIEnv *env, jobject jo
 	return dataArray;
 }
 
-JNIEXPORT jbyteArray JNICALL ImageRefocus_GetImageResultWithDepth(JNIEnv *env, jobject jobj, jint intRefocus, jbyteArray jleftData, jint leftlength, int width, int height, jbyteArray jDisprityMap, jint disprityMapLength)
+JNIEXPORT jbyteArray JNICALL ImageRefocus_GetImageResultWithDepth(JNIEnv *env, jobject jobj, jlong intRefocus, jbyteArray jleftData, jint leftlength, int width, int height, jbyteArray jDisprityMap, jint disprityMapLength)
 {
 	int res = -1;
 	jbyteArray dataArray = 0;
@@ -208,7 +208,7 @@ JNIEXPORT jbyteArray JNICALL ImageRefocus_GetImageResultWithDepth(JNIEnv *env, j
 
 /*----------------------------Video Refocus-------------------------------------*/
 
-JNIEXPORT jint JNICALL VideoRefocus_Init(JNIEnv *env, jobject jobj)
+JNIEXPORT jlong JNICALL VideoRefocus_Init(JNIEnv *env, jobject jobj)
 {
 	int ret = 0;
 
@@ -216,10 +216,10 @@ JNIEXPORT jint JNICALL VideoRefocus_Init(JNIEnv *env, jobject jobj)
 
 	ret = videorefocus->Init();
 
-	return (jint)videorefocus;
+	return (jlong)videorefocus;
 }
 
-JNIEXPORT void JNICALL VideoRefocus_Uninit(JNIEnv *env, jobject jobj, jint intRefocus)
+JNIEXPORT void JNICALL VideoRefocus_Uninit(JNIEnv *env, jobject jobj, jlong intRefocus)
 {
 	if (intRefocus)
 	{		
@@ -239,7 +239,7 @@ JNIEXPORT void JNICALL VideoRefocus_Uninit(JNIEnv *env, jobject jobj, jint intRe
 	}
 }
 
-JNIEXPORT jint JNICALL VideoRefocus_SetCameraImageInfo(JNIEnv *env, jobject jobj, jint intRefocus, jint leftW, jint leftH, jint rightW, jint rightH)
+JNIEXPORT jint JNICALL VideoRefocus_SetCameraImageInfo(JNIEnv *env, jobject jobj, jlong intRefocus, jint leftW, jint leftH, jint rightW, jint rightH)
 {
 	int ret = -1;	
 
@@ -256,7 +256,7 @@ JNIEXPORT jint JNICALL VideoRefocus_SetCameraImageInfo(JNIEnv *env, jobject jobj
 	return ret;
 }
 
-JNIEXPORT jint JNICALL VideoRefocus_SetImageDegree(JNIEnv *env, jobject jobj, jint intRefocus, jint degree)
+JNIEXPORT jint JNICALL VideoRefocus_SetImageDegree(JNIEnv *env, jobject jobj, jlong intRefocus, jint degree)
 {
 	// 0为nv21，1为yuyv，目前yuyv不支持。
 	int ret = -1;	
@@ -274,7 +274,7 @@ JNIEXPORT jint JNICALL VideoRefocus_SetImageDegree(JNIEnv *env, jobject jobj, ji
 	return ret;
 }
 
-JNIEXPORT jint JNICALL VideoRefocus_SetCalibrationData(JNIEnv *env, jobject jobj, jint intRefocus, jbyteArray jCaliData, jint dataLength)
+JNIEXPORT jint JNICALL VideoRefocus_SetCalibrationData(JNIEnv *env, jobject jobj, jlong intRefocus, jbyteArray jCaliData, jint dataLength)
 {
 	LOGD("VideoRefocus_SetCalibrationData in");
 
@@ -295,7 +295,7 @@ JNIEXPORT jint JNICALL VideoRefocus_SetCalibrationData(JNIEnv *env, jobject jobj
 	return ret;
 }
 
-JNIEXPORT jint JNICALL VideoRefocus_SetParam(JNIEnv *env, jobject jobj, jint intRefocus, jint ptX, jint ptY, jint blurIntensity, jint bRefocusOn)
+JNIEXPORT jint JNICALL VideoRefocus_SetParam(JNIEnv *env, jobject jobj, jlong intRefocus, jint ptX, jint ptY, jint blurIntensity, jint bRefocusOn)
 {
 	int ret = -1;	
 
@@ -312,7 +312,7 @@ JNIEXPORT jint JNICALL VideoRefocus_SetParam(JNIEnv *env, jobject jobj, jint int
 	return ret;
 }
 
-JNIEXPORT jbyteArray JNICALL VideoRefocus_Process(JNIEnv *env, jobject jobj, jint intRefocus, jbyteArray jleftData, jint leftlength, jbyteArray jrightData, jint rightlength, int width, int height, int auxWidth, int auxHeight)
+JNIEXPORT jbyteArray JNICALL VideoRefocus_Process(JNIEnv *env, jobject jobj, jlong intRefocus, jbyteArray jleftData, jint leftlength, jbyteArray jrightData, jint rightlength, int width, int height, int auxWidth, int auxHeight)
 {
 	LOGD("VideoRefocus_Process in, leftlength=%d, rightlength=%d, width=%d, height=%d, auxWidth=%d, auxHeight=%d", leftlength, rightlength, width, height, auxWidth, auxHeight);
 	//support nv21
@@ -365,26 +365,26 @@ JNIEXPORT jbyteArray JNICALL VideoRefocus_Process(JNIEnv *env, jobject jobj, jin
 static JNINativeMethod gImageMethods[] = 
 {
 	//image
-	{ "ImageRefocus_Init",				 		"(I)I",										(void*) ImageRefocus_Init },
-	{ "ImageRefocus_Uninit",			 		"(I)V",										(void*) ImageRefocus_Uninit },
-	{ "ImageRefocus_SetDCIRParam",       		"(III)I",							    	(void*) ImageRefocus_SetDCIRParam },
-	{ "ImageRefocus_SetParam",       			"(IIII)I",							    	(void*) ImageRefocus_SetParam },
-	{ "ImageRefocus_SetCameraImageInfo", 		"(IIIII)I",									(void*) ImageRefocus_SetCameraImageInfo },
-	{ "ImageRefocus_SetCalibrationData", 		"(I[BI)I",									(void*) ImageRefocus_SetCalibrationData },
-    { "ImageRefocus_GetImageResult",     		"(I[BI[BIIIII)[B",							(void*) ImageRefocus_GetImageResult },
-    { "ImageRefocus_GetImageResultWithDepth",   "(I[BIII[BI)[B",							(void*) ImageRefocus_GetImageResultWithDepth }
+	{ "ImageRefocus_Init",				 		"(I)J",										(void*) ImageRefocus_Init },
+	{ "ImageRefocus_Uninit",			 		"(J)V",										(void*) ImageRefocus_Uninit },
+	{ "ImageRefocus_SetDCIRParam",       		"(JII)I",							    	(void*) ImageRefocus_SetDCIRParam },
+	{ "ImageRefocus_SetParam",       			"(JIII)I",							    	(void*) ImageRefocus_SetParam },
+	{ "ImageRefocus_SetCameraImageInfo", 		"(JIIII)I",									(void*) ImageRefocus_SetCameraImageInfo },
+	{ "ImageRefocus_SetCalibrationData", 		"(J[BI)I",									(void*) ImageRefocus_SetCalibrationData },
+    { "ImageRefocus_GetImageResult",     		"(J[BI[BIIIII)[B",							(void*) ImageRefocus_GetImageResult },
+    { "ImageRefocus_GetImageResultWithDepth",   "(J[BIII[BI)[B",							(void*) ImageRefocus_GetImageResultWithDepth }
 };
 
 static JNINativeMethod gVideoMethods[] = 
 {
 	//video
-	{ "VideoRefocus_Init",				 "()I",								    		(void*) VideoRefocus_Init },
-	{ "VideoRefocus_Uninit",			 "(I)V",										(void*) VideoRefocus_Uninit },
-	{ "VideoRefocus_SetCameraImageInfo", "(IIIII)I",									(void*) VideoRefocus_SetCameraImageInfo },
-	{ "VideoRefocus_SetImageDegree",     "(II)I",						    			(void*) VideoRefocus_SetImageDegree },
-	{ "VideoRefocus_SetCalibrationData", "(I[BI)I",										(void*) VideoRefocus_SetCalibrationData },
-	{ "VideoRefocus_SetParam",           "(IIIII)I",									(void*) VideoRefocus_SetParam },
-    { "VideoRefocus_Process",            "(I[BI[BIIIII)[B",								(void*) VideoRefocus_Process }
+	{ "VideoRefocus_Init",				 	"()J",								    		(void*) VideoRefocus_Init },
+	{ "VideoRefocus_Uninit",			 	"(J)V",											(void*) VideoRefocus_Uninit },
+	{ "VideoRefocus_SetCameraImageInfo", 	"(JIIII)I",										(void*) VideoRefocus_SetCameraImageInfo },
+	{ "VideoRefocus_SetImageDegree",     	"(JI)I",						    			(void*) VideoRefocus_SetImageDegree },
+	{ "VideoRefocus_SetCalibrationData", 	"(J[BI)I",										(void*) VideoRefocus_SetCalibrationData },
+	{ "VideoRefocus_SetParam",           	"(JIIII)I",										(void*) VideoRefocus_SetParam },
+    { "VideoRefocus_Process",            	"(J[BI[BIIIII)[B",								(void*) VideoRefocus_Process }
 };
 
 int register_arcsoft_android_imagerefocus(JNIEnv* env)

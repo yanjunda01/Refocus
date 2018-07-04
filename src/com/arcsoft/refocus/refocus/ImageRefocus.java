@@ -10,7 +10,7 @@ public class ImageRefocus {
 		System.loadLibrary("arcsoft_dualcam_refocus_wrap");
 	}
 
-	private int mEngineHandler = 0;
+	private long mEngineHandler = 0;
 
 	private boolean IsInited() {
 		return (mEngineHandler != 0);
@@ -100,20 +100,20 @@ public class ImageRefocus {
 	/***********************************************************************/
 	/********************** Refocus Native JNI Define **********************/
 	/***********************************************************************/
-	private native int ImageRefocus_Init(int mode);
+	private native long ImageRefocus_Init(int mode);
 
-	private native void ImageRefocus_Uninit(int hEngine);
+	private native void ImageRefocus_Uninit(long hEngine);
 
-	private native int ImageRefocus_SetDCIRParam(int hEngine, int imgDegree, int fMaxFOV);
+	private native int ImageRefocus_SetDCIRParam(long hEngine, int imgDegree, int fMaxFOV);
 
-	private native int ImageRefocus_SetParam(int hEngine, int ptX, int ptY, int blurIntensity);
+	private native int ImageRefocus_SetParam(long hEngine, int ptX, int ptY, int blurIntensity);
 
-	private native int ImageRefocus_SetCameraImageInfo(int hEngine, int main_width, int main_height, int aux_width, int aux_height);
+	private native int ImageRefocus_SetCameraImageInfo(long hEngine, int main_width, int main_height, int aux_width, int aux_height);
 		
-	private native int ImageRefocus_SetCalibrationData(int hEngine, byte[] caliData, int length);
+	private native int ImageRefocus_SetCalibrationData(long hEngine, byte[] caliData, int length);
 		
-	private native byte[] ImageRefocus_GetImageResult(int hEngine, byte[] jleftData, int leftlength, byte[] jrightData, int rightlength, int width, int height, int auxWidth, int auxHeight);
+	private native byte[] ImageRefocus_GetImageResult(long hEngine, byte[] jleftData, int leftlength, byte[] jrightData, int rightlength, int width, int height, int auxWidth, int auxHeight);
 
-	private native byte[] ImageRefocus_GetImageResultWithDepth(int hEngine, byte[] jleftData, int leftlength, int width, int height, byte[] jDisprityMap, int disprityMapLength);
+	private native byte[] ImageRefocus_GetImageResultWithDepth(long hEngine, byte[] jleftData, int leftlength, int width, int height, byte[] jDisprityMap, int disprityMapLength);
 
 }
