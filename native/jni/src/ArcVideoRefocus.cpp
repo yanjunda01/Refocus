@@ -97,8 +97,8 @@ int CArcVideoRefocus::SetImageDegree(int degree)
 
 int CArcVideoRefocus::Process(ASVLOFFSCREEN* imgLeft, ASVLOFFSCREEN* imgRight, ASVLOFFSCREEN* imgResult)
 {	
-	int res = MOK;
-	LOGD("Process in");
+	int res = -10;
+	LOGD("Process in, %dx%d, format=%d, %dx%d, format=%d", imgLeft->i32Width, imgLeft->i32Height, imgLeft->u32PixelArrayFormat, imgRight->i32Width, imgRight->i32Height, imgRight->u32PixelArrayFormat);
 	
 	ARC_DCVR_PARAM param;
 	ARC_DCVR_GetDefaultParam(&param);
@@ -106,19 +106,22 @@ int CArcVideoRefocus::Process(ASVLOFFSCREEN* imgLeft, ASVLOFFSCREEN* imgRight, A
 	param.ptFocus.y = m_focusY;
 	param.i32BlurLevel = m_blurlevel;	//[1, 100]
 	param.bRefocusOn = m_bRefocusOn;
+	if(imgLeft->u32PixelArrayFormat == ASVL_PAF_NV21 && imgRight->u32PixelArrayFormat == ASVL_PAF_NV21)
+	{
 #ifdef DUMPVIDEO
-	char str[64];
-	static int ii = 0;
-	sprintf(str, "/sdcard/dcim/bokehpreview_main_in_%dx%d_%d.nv21", imgLeft->i32Width, imgLeft->i32Height, ii++);
-	DumpImg(*imgLeft, str);
-	sprintf(str, "/sdcard/dcim/bokehpreview_aux_in_%dx%d_%d.nv21", imgRight->i32Width, imgRight->i32Height, ii++);
-	DumpImg(*imgRight, str);
+		char str[64];
+		static int ii = 0;
+		sprintf(str, "/sdcard/dcim/bokehpreview_main_in_%dx%d_%d.nv21", imgLeft->i32Width, imgLeft->i32Height, ii++);
+		DumpImg(*imgLeft, str);
+		sprintf(str, "/sdcard/dcim/bokehpreview_aux_in_%dx%d_%d.nv21", imgRight->i32Width, imgRight->i32Height, ii++);
+		DumpImg(*imgRight, str);
 #endif
-	res = ARC_DCVR_Process(m_hVideoRefocus, imgLeft, imgRight, imgResult, &param);
+		res = ARC_DCVR_Process(m_hVideoRefocus, imgLeft, imgRight, imgResult, &param);
 #ifdef DUMPVIDEO
-	sprintf(str, "/sdcard/dcim/bokehpreview_out_%dx%d_%d.nv21", imgResult->i32Width, imgResult->i32Height, ii++);
-	DumpImg(*imgResult, str);
+		sprintf(str, "/sdcard/dcim/bokehpreview_out_%dx%d_%d.nv21", imgResult->i32Width, imgResult->i32Height, ii++);
+		DumpImg(*imgResult, str);
 #endif
+	}
 	LOGD("Process out = %d", res);
 	return res;
 }
