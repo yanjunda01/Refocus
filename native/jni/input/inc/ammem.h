@@ -21,12 +21,6 @@
 
 #include "amcomdef.h"
 
-typedef struct	__tag_mem_info
-{
-	MDWord	dwTotalMemUsed;
-	MDWord	dwTotalMemFree;
-}MMEMINFO, *LPMMEMINFO;
-
 
 #ifdef __cplusplus
 extern "C" {

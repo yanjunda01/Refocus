@@ -11,7 +11,7 @@ LOCAL_SRC_FILES += src/jni_imagerefocus.cpp
 LOCAL_SRC_FILES += src/ArcImageRefocus.cpp
 LOCAL_SRC_FILES += src/ArcVideoRefocus.cpp
 
-ifeq ($(TARGET_ARCH_ABI),armeabi)
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 	LOCAL_LDLIBS += -L$(LOCAL_PATH)/input/lib32
 else ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
 	LOCAL_LDLIBS += -L$(LOCAL_PATH)/input/lib64

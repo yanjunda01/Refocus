@@ -147,9 +147,45 @@ extern "C" {
 
 #define		ASVL_PAF_DEPTH_U16			0xc02
 
+
+/* MSB
+  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+  0  0  0  0  0  0  0  0  D  D  D  D  D  D  D  D , 
+*/
+#define		ASVL_PAF_DEPTH8_U16_MSB	0xc10
+
+/* LSB
+  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+  D  D  D  D  D  D  D  D  0  0  0  0  0  0  0  0 , 
+*/
+#define		ASVL_PAF_DEPTH8_U16_LSB	0xc11
+
+/* MSB
+  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+  0  0  0  0  0  0  D  D  D  D  D  D  D  D  D  D , 
+*/
+#define		ASVL_PAF_DEPTH10_U16_MSB	0xc12
+
+/* LSB
+  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+  D  D  D  D  D  D  D  D  D  D  0  0  0  0  0  0 , 
+*/
+#define		ASVL_PAF_DEPTH10_U16_LSB	0xc13
+
+/* MSB
+  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+  0  0  0  0  D  D  D  D  D  D  D  D  D  D  D  D , 
+*/
+#define		ASVL_PAF_DEPTH12_U16_MSB	0xc14
+
+/* LSB
+  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+  D  D  D  D  D  D  D  D  D  D  D  D  0  0  0  0 , 
+*/
+#define		ASVL_PAF_DEPTH12_U16_LSB	0xc15
+
+
 /*10 bits RGGB CFA raw data, each data has 2 bytes*/
-
-
 #define     ASVL_PAF_RAW10_RGGB_10B       		   0xd01
 #define     ASVL_PAF_RAW10_GRBG_10B                0xd02
 #define     ASVL_PAF_RAW10_GBRG_10B                0xd03

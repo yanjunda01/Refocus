@@ -3,6 +3,7 @@
 #include <jni.h>
 #include <android/log.h>
 #include <stdlib.h>	//malloc, free, memset
+#include "string.h"
 
 #include "ArcImageRefocus.h"
 #include "ArcVideoRefocus.h"
